@@ -21,4 +21,4 @@ RUN cd /app && pipenv install --system --deploy
 
 COPY . /app
 
-CMD gunicorn --chdir /app --bind 0.0.0.0:5000 "__init__:app"
+CMD gunicorn --chdir /app --bind 0.0.0.0:5000 "backend:app"
