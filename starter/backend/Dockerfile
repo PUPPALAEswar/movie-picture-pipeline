@@ -19,6 +19,6 @@ RUN mkdir -p /var/www/app && mkdir /app
 COPY Pipfile* /app/
 RUN cd /app && pipenv install --system --deploy
 
-COPY . /app
+COPY starter/backend /app/backend
 
 CMD gunicorn --chdir /app --bind 0.0.0.0:5000 "backend:app"
