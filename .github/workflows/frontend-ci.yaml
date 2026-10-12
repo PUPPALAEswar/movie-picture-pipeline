@@ -84,6 +84,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: starter/frontend/.nvmrc
+
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: starter/frontend/node_modules
+          key: frontend-node-${{ runner.os }}-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            frontend-node-${{ runner.os }}-
+
+      - name: Install dependencies
+        working-directory: starter/frontend
+        run: npm ci
+
       - name: Build Docker image
         working-directory: starter/frontend
         env:
